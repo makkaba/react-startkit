@@ -15,7 +15,8 @@ var config = {
     module: {
         loaders: [
             {
-                test: /\?.js?/,
+                test   :/\.jsx?$/,
+                exclude:/(node_modules|bower_components)/,
                 include: SRC_DIR,
                 loader: "babel-loader",
                 query: {
