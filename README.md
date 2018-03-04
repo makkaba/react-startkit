@@ -14,7 +14,7 @@ npm install --save react react-dom
 ```
 
 ``` sh
-npm install webpack webpack-dev-server babel-core babel-loader babel-preset-es2015 babel-preset-react babel-preset-stage-2 --save-dev
+npm install --save-dev webpack webpack-dev-server babel-core babel-loader babel-preset-es2015 babel-preset-react babel-preset-stage-2 babel-preset-stage-3 babel-core
 
 ```
 
@@ -61,7 +61,7 @@ var config = {
     module: {
         loaders: [
             {
-                test: /\?.js?/,
+                test: /\?.jsx?/,
                 include: SRC_DIR,
                 loader: "babel-loader",
                 query: {
