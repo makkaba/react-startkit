@@ -1,30 +1,40 @@
-var webpack = require("webpack");
-var path = require("path");
+const path = require('path');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const CleanWebpackPlugin = require('clean-webpack-plugin');
 
-var DIST_DIR = path.resolve(__dirname, "dist");
-var SRC_DIR = path.resolve(__dirname, "src");
+module.exports = {
+  entry: {
+    app: './src/index.js'
+  },
+  devtool: 'inline-source-map',
+  devServer: {
+      contentBase: './dist'
+  },
+  module: {
+    rules: [
+      {
+        test: /\.(js|jsx)$/,
+        exclude: /node_modules/,
+        use: ['babel-loader']
+      }
+    ]
+  },
+  resolve: {
+    extensions: ['*', '.js', '.jsx']
+  },
+  plugins: [
+    new CleanWebpackPlugin(['dist']),
+    new HtmlWebpackPlugin({
+        template: './template.html',
+        inject: 'body',
+        title: 'Output Management'
+      })
+    ],
+    
+  output: {
+    filename: '[name].bundle.js',
+    path: path.resolve(__dirname, 'dist')
+  }
 
-
-var config = {
-    entry: SRC_DIR + "/index.js",
-    output: {
-        path: DIST_DIR,
-        filename: "bundle.js",
-        publicPath: "/app/"
-    },
-    module: {
-        loaders: [
-            {
-                test   :/\.jsx?$/,
-                exclude:/(node_modules|bower_components)/,
-                include: SRC_DIR,
-                loader: "babel-loader",
-                query: {
-                    presets: ["react", "es2015", "stage-3"]
-                }
-            }
-        ]
-    }
+  
 };
-
-module.exports = config;
